@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 
 // ADD_PHOTOS
-export const addphotos = (
+export const addPhotos = (
   {
     tag = '',
     note = '',

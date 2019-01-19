@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
 import {BrowserRouter,Route,Switch,Link} from 'react-router-dom'
 import HomeDashBoard from './components/HomeDashBoard'
-import AddExpensePage from './components/AddPhotoPage'
-import EditExpensePage from './components/EditPhotoPage'
-import HelpExpensePage from './components/HelpPhotoPage'
+import AddPhotoPage from './components/AddPhotoPage'
+import EditPhotoPage from './components/EditPhotoPage'
+import HelpPhotoPage from './components/HelpPhotoPage'
 import Header from './components/Header'
 import Error from './components/Error'
 import createStore from './store/createStore'
-import { addphotos } from './Action/photos'
+import { Provider } from 'react-redux'
+import { addPhotos } from './Action/photos'
 import { setTagFilter } from './Action/filters';
 import getVisiblePhotos from './selectors/visiblePhotos'
-
 const store=createStore()
-store.dispatch(addphotos({ tag: 'Water bill' }))
-store.dispatch(addphotos({ tag: 'Laptop' }))
-store.dispatch(setTagFilter('water'));
+store.dispatch(addPhotos({ tag: 'Water' }));
+store.dispatch(addPhotos({ tag: 'Gas bill'}));
+store.dispatch(addPhotos({ tag: 'Harry' }));
+store.dispatch(addPhotos({ tag: 'Snake' }));
+// store.dispatch(setTagFilter('water'));
 
-console.log(store.getState())
-const state = store.getState();
-const visible = getVisiblePhotos(state.photos, state.filters);
-console.log(store.getState())
+const state = store.getState()
+console.log(state)
+const visible= getVisiblePhotos(state.photos, state.filters);
+console.log(visible);
+
 
 class App extends Component {
   render() {
@@ -31,9 +35,9 @@ class App extends Component {
       <Header />
       <Switch>
       <Route path="/" exact component={HomeDashBoard} />
-      <Route path="/create" component={AddExpensePage}/>
-      <Route path="/edit/:id" component={EditExpensePage}/>
-      <Route path="/help" component={HelpExpensePage}/>
+      <Route path="/create" component={AddPhotoPage}/>
+      <Route path="/edit/:id" component={EditPhotoPage}/>
+      <Route path="/help" component={HelpPhotoPage}/>
       <Route component={Error} />
       </Switch>
       </div>
@@ -41,5 +45,11 @@ class App extends Component {
        )
       
 }
-}
-export default App;
+};
+
+const jsx=(
+  <Provider store={store}>
+  <App/>
+  </Provider>
+);
+export default jsx;

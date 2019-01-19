@@ -9,7 +9,7 @@ export default (photos, { tag, sortBy, startDate, endDate }) => {
       if (sortBy === 'date') {
         return a.createdAt < b.createdAt ? 1 : -1;
       } else if (sortBy === 'tag') {
-        return a.tag < b.tag ? 1 : -1;
+        return a.tag > b.tag ? 1 : -1;
       }
     });
   };

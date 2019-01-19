@@ -9,7 +9,7 @@ export const setTagFilter = (tag = '') => ({
   });
   
   // SORT_BY_TAG
-  export const sortByTAG = () => ({
+  export const sortByTag = () => ({
     type: 'SORT_BY_TAG'
   });
   
